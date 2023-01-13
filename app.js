@@ -41,6 +41,20 @@ const httpRequestListener = (request, response) => {
     }
 
     if (method === 'POST') {
+        if (url === '/users/update_posts') {
+            let post_body = ''
+            request.on('data', (data) => { post_body += data })
+            request.on('end', () => {
+                const post = JSON.parse(post_body)
+                posts.push({
+                    id: post_body.id,
+                    title: post_body.title,
+                    content: post_body.content,
+                    userId: post_body.userId,
+                })
+                response.end(JSON.stringify({ messsage: 'postCreated' }))
+            })
+        }
         if (url === '/users/postman') {
             let body = ''
             request.on('data', (data) => { body += data })
