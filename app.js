@@ -34,6 +34,9 @@ const httpRequestListener = (request, response) => {
     const { url, method } = request
 
     if (method === 'GET') {
+        if (url === '/get/details') {
+
+        }
         if (url === '/ping') {
             response.writeHead(200, { 'content-type': 'application/json' })
             response.end(JSON.stringify({ message: 'ok' }))
@@ -54,8 +57,7 @@ const httpRequestListener = (request, response) => {
                 })
                 response.end(JSON.stringify({ messsage: 'postCreated' }))
             })
-        }
-        if (url === '/users/postman') {
+        } else if (url === '/users/postman') {
             let body = ''
             request.on('data', (data) => { body += data })
             request.on('end', () => {
